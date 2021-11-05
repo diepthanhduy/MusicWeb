@@ -12,7 +12,7 @@ namespace MusicWeb.Controllers
 {
     public class AdminController : Controller
     {
-        dbAdminDataContext db = new dbAdminDataContext();
+        DBMusicDataContext db = new DBMusicDataContext();
         // GET: Admin
         public ActionResult Index()
         {
@@ -118,38 +118,39 @@ namespace MusicWeb.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Themmoibaihat(Nhac nhac, HttpPostedFileBase fileUpload/*, HttpPostedFileBase fileupanh*/)
+        public ActionResult Themmoibaihat(Nhac nhac, HttpPostedFileBase fileAnh, HttpPostedFileBase fileNhac)
         {
             ViewBag.MaNgheSi = new SelectList(db.NgheSis.ToList().OrderBy(n => n.TenNgheSi), "MaNgheSi", "TenNgheSi");
             ViewBag.MaLoai = new SelectList(db.TheLoais.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
             ViewBag.MaSangTac = new SelectList(db.SangTacs.ToList().OrderBy(n => n.TenNguoiST), "MaSangTac", "TenNguoiST");
             ViewBag.MaAlbum = new SelectList(db.Albums.ToList().OrderBy(n => n.TenAlbum), "MaAlbum", "TenAlbum");
 
-            if (fileUpload == null /*|| fileupanh == null*/)
+            if (fileAnh == null || fileNhac == null)
             {
                 ViewBag.Thongbao = "Thieu File";
-                return View();
+                return this.View();
             }
             //Them csdl
             else
             {
                 if (ModelState.IsValid)
                 {
-                    var fileName = Path.GetFileName(fileUpload.FileName);
-                    var pathAnh = Path.Combine(Server.MapPath("~/img"), fileName);
-                    //var fileName = Path.GetFileName(fileUpload.FileName);
-                    //var pathNhac = Path.Combine(Server.MapPath("~/music"), fileName);
+                    var fileNameAnh = Path.GetFileName(fileAnh.FileName);
+                    var pathAnh = Path.Combine(Server.MapPath("~/img"), fileNameAnh);
+                    var fileNameNhac = Path.GetFileName(fileNhac.FileName);
+                    var pathNhac = Path.Combine(Server.MapPath("~/music"), fileNameNhac);
+
                     if (System.IO.File.Exists(pathAnh))
                     {
                         ViewBag.Thongbao = "Da ton tai file nhac";
                     }
                     else
                     {
-                        fileUpload.SaveAs(pathAnh);
-                        //fileUpload.SaveAs(pathNhac);
+                        fileAnh.SaveAs(pathAnh);
+                        fileNhac.SaveAs(pathNhac);
                     }
-                    //nhac.FileAnh = fileName;
-                    nhac.FileNhac = fileName;
+                    nhac.FileAnh = fileNameAnh;
+                    nhac.FileNhac = fileNameNhac;
                     //Luu vao csdl
                     db.Nhacs.InsertOnSubmit(nhac);
                     db.SubmitChanges();

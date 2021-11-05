@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AppNgheNhac" Class="DBMusicDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-9KEDI0O\SQLEXPRESS;Initial Catalog=AppNgheNhac;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AppNgheNhacConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admins" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="MaAdmin" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenAdmin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="MaUser" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenUser" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TaiKhoan" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="User_PlayList" Member="PlayLists" ThisKey="MaUser" OtherKey="MaUser" Type="PlayList" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="MaAlbum" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenAlbum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Album_Nhac" Member="Nhacs" ThisKey="MaAlbum" OtherKey="MaAlbum" Type="Nhac" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTPlayList" Member="CTPlayLists">
+    <Type Name="CTPlayList">
+      <Column Name="MaPlayList" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaBaiNhac" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Nhac_CTPlayList" Member="Nhac" ThisKey="MaBaiNhac" OtherKey="MaBaiNhac" Type="Nhac" IsForeignKey="true" />
+      <Association Name="PlayList_CTPlayList" Member="PlayList" ThisKey="MaPlayList" OtherKey="MaPlayList" Type="PlayList" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NgheSi" Member="NgheSis">
+    <Type Name="NgheSi">
+      <Column Name="MaNgheSi" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenNgheSi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="NgheSi_Nhac" Member="Nhacs" ThisKey="MaNgheSi" OtherKey="MaNgheSi" Type="Nhac" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Nhac" Member="Nhacs">
+    <Type Name="Nhac">
+      <Column Name="MaBaiNhac" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenNhac" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayCN" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MaNgheSi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaSangTac" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaAlbum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileNhac" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="FileAnh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Nhac_CTPlayList" Member="CTPlayLists" ThisKey="MaBaiNhac" OtherKey="MaBaiNhac" Type="CTPlayList" />
+      <Association Name="Album_Nhac" Member="Album" ThisKey="MaAlbum" OtherKey="MaAlbum" Type="Album" IsForeignKey="true" />
+      <Association Name="NgheSi_Nhac" Member="NgheSi" ThisKey="MaNgheSi" OtherKey="MaNgheSi" Type="NgheSi" IsForeignKey="true" />
+      <Association Name="SangTac_Nhac" Member="SangTac" ThisKey="MaSangTac" OtherKey="MaSangTac" Type="SangTac" IsForeignKey="true" />
+      <Association Name="TheLoai_Nhac" Member="TheLoai" ThisKey="MaLoai" OtherKey="MaLoai" Type="TheLoai" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PlayList" Member="PlayLists">
+    <Type Name="PlayList">
+      <Column Name="MaPlayList" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenPlayList" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThoiGianTao" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="PlayList_CTPlayList" Member="CTPlayLists" ThisKey="MaPlayList" OtherKey="MaPlayList" Type="CTPlayList" />
+      <Association Name="User_PlayList" Member="User" ThisKey="MaUser" OtherKey="MaUser" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SangTac" Member="SangTacs">
+    <Type Name="SangTac">
+      <Column Name="MaSangTac" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenNguoiST" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="SangTac_Nhac" Member="Nhacs" ThisKey="MaSangTac" OtherKey="MaSangTac" Type="Nhac" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TheLoai" Member="TheLoais">
+    <Type Name="TheLoai">
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TheLoai_Nhac" Member="Nhacs" ThisKey="MaLoai" OtherKey="MaLoai" Type="Nhac" />
+    </Type>
+  </Table>
+</Database>
