@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MusicWeb.Models.SangTac>
+
+@{
+    ViewBag.Title = "DSSangTac";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DSSangTac</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ThemSangTac")
+</p>
+<table class="table">
+    <tr>
+        <th style="width:150px">Tên Người Sáng Tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNguoiST)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "XoaSangTac", new { id = item.MaSangTac })
+            </td>
+        </tr>
+    }
+
+</table>

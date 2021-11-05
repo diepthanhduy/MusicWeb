@@ -1,0 +1,87 @@
+﻿@model MusicWeb.Models.Nhac
+
+@{
+    ViewBag.Title = "Themmoibaihat";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Thêm Mới Bài Hát</h2>
+
+@using (Html.BeginForm("Themmoibaihat", "Admin", FormMethod.Post, new { @enctype="multipart/forn-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Bài Hát</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenNhac, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenNhac)
+                @Html.ValidationMessageFor(model => model.TenNhac)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayCN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" name="NgayCN" value="" />
+                @Html.ValidationMessageFor(model => model.NgayCN)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNgheSi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaNgheSi")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaLoai, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaLoai")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaSangTac, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaSangTac")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaAlbum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaAlbum")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileNhac, new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                <input type="file" name="fileupload"  />
+                @ViewBag.Thongbao
+            </div>*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FileNhac)
+                @Html.ValidationMessageFor(model => model.FileNhac)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileAnh, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+            <input type="file" name="fileupload" />
+            @ViewBag.Thongbao
+            </div>
+            @*<div class="col-md-10">
+                @Html.EditorFor(model => model.FileAnh)
+                @Html.ValidationMessageFor(model => model.FileAnh)
+            </div>*@
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,89 @@
+﻿@using MusicWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MusicWeb.Models.Nhac>
+
+@{
+    ViewBag.Title = "Nhac";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QUẢN LÝ DANH SÁCH BÀI HÁT</h2>
+
+<p>
+    @Html.ActionLink("Thêm Mới", "Themmoibaihat")
+</p>
+<table class="table" border="1">
+    <tr>
+        <th style="width: 150px">
+            Tên Nhạc
+        </th>
+        <th style="width: 140px">
+            Ngày Cập Nhật
+        </th>
+        <th style="width: 100px">
+            Nghệ Sĩ
+        </th>
+        <th style="width: 100px">
+            Loại Nhạc
+        </th>
+        <th style="width: 100px">
+            Sáng Tác
+        </th>
+        <th style="width: 100px">
+            Album
+        </th>
+        <th style="width: 120px">
+            Ảnh
+        </th>
+        <th style="width: 200px">
+            File Nhạc
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenNhac)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayCN)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgheSi.TenNgheSi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SangTac.TenNguoiST)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Album.TenAlbum)
+    </td>
+    <td>
+        <img style="width:120px; height:100px" src="@Url.Content("~/img/"+ item.FileAnh)" />
+    </td>
+    <td>
+        <audio style="width:100%" controls>
+            <source src="@Url.Content("~/music/"+ item.FileNhac)" type="audio/mp4">
+        </audio>
+    </td>
+    <td style="width:190px">
+        @Html.ActionLink("Sửa", "Suanhac", new { id = item.MaBaiNhac }) |
+        @Html.ActionLink("Chi tiết", "Chitietnhac", new { id = item.MaBaiNhac }) |
+        @Html.ActionLink("Xóa", "Xoanhac", new { id = item.MaBaiNhac })
+    </td>
+</tr>
+    }
+</table>
+@*Tao lien ket cac trang*@
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page}))
+</div>
+<style>
+    .MenuTrang li{
+        display: inline;
+    }
+</style>

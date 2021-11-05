@@ -1,0 +1,41 @@
+﻿@using MusicWeb.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<MusicWeb.Models.TheLoai>
+
+@{
+    ViewBag.Title = "TheLoaiNhac";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Thể Loại Nhạc</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ThemLoaiNhac")
+</p>
+<table class="table">
+    <tr>
+        <th style="width:150px">Tên Thể Loại</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLoai)
+            </td>
+            <td>
+                @Html.ActionLink("Xóa", "XoaTheLoaiNhac", new { id = item.MaLoai })
+            </td>
+        </tr>
+    }
+
+</table>
+Trang@(Model.PageCount<Model.PageNumber ? 0: Model.PageNumber)/@Model.PageCount;
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("TheLoaiNhac", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
