@@ -1,10 +1,11 @@
-﻿using MusicWeb.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MusicWeb.Models;
 
 namespace MusicWeb.apiController
 {
@@ -19,15 +20,26 @@ namespace MusicWeb.apiController
             foreach (var item in db.Nhacs)
             {
                 listSong.Add(new Song() { IDBaiHat = item.MaBaiNhac, TenBaiHat = item.TenNhac, FileAnh = item.FileAnh,
-                                          TenNgheSi = item.NgheSi.TenNgheSi});
+                                          TenNgheSi = item.NgheSi.TenNgheSi, FileNhac = item.FileNhac});
             }
             return listSong;
         }
 
         // GET: api/Song/5
-        public string Get(int id)
+        public IEnumerable<Song> Get(int id)
         {
-            return "value";
+            var nhac = db.Nhacs.SingleOrDefault(x => x.MaBaiNhac == id);
+            List<Song> song = new List<Song>();
+           song.Add(new Song()
+           {
+               IDBaiHat = nhac.MaBaiNhac,
+               TenBaiHat = nhac.TenNhac
+            ,
+               FileAnh = nhac.FileAnh,
+               FileNhac = nhac.FileNhac,
+               TenNgheSi = nhac.NgheSi.TenNgheSi
+           });
+            return (IEnumerable<Song>)song;
         }
 
         // POST: api/Song

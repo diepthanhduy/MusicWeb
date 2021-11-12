@@ -11,6 +11,7 @@ namespace MusicWeb.Models
         public string TenBaiHat { get; set; }
         public string TenNgheSi { get; set; }
         public string FileAnh { get; set; }
+        public string FileNhac { get; set; }
 
     }
 }
