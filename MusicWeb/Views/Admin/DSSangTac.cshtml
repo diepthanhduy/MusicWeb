@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>DSSangTac</h2>
+<h2>Danh Sách Tác Giả</h2>
 
 <p>
-    @Html.ActionLink("Create New", "ThemSangTac")
+    @Html.ActionLink("Thêm mới tác giả", "ThemSangTac")
 </p>
 <table class="table">
     <tr>
+        <th style="width:150px">Id</th>
         <th style="width:150px">Tên Người Sáng Tác</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSangTac)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenNguoiST)
             </td>

@@ -1,0 +1,90 @@
+﻿@model MusicWeb.Models.Nhac
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>XÁC NHẬN XOÁ THÔNG TIN BÀI HÁT</h2>
+<h3>Bạn có chắc muốn xóa không?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Bài Hát:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNhac)
+        </dd>
+
+        <dt>
+            Ngày Cập Nhật
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd/MM/yyyy}", Model.NgayCN)
+        </dd>
+
+        <dt>
+            Nghệ Sĩ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgheSi.TenNgheSi)
+        </dd>
+
+        <dt>
+            Thể Loại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoai.TenLoai)
+        </dd>
+
+        <dt>
+            Tác Giả:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SangTac.TenNguoiST)
+        </dd>
+
+        <dt>
+            Album
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Album.TenAlbum)
+        </dd>
+
+        <dt>
+            Nhạc:
+        </dt>
+
+        <dd>
+            <audio style="width:100%" controls>
+                <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4">
+            </audio>
+        </dd>
+
+        <dt>
+            Ảnh:
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/img/"+ Model.FileAnh)" width="120px" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xác Nhận" class="btn btn-default" /> |
+            @Html.ActionLink("Quay Lại", "Nhac")
+        </div>
+    }
+</div>

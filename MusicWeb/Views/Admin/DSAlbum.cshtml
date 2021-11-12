@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>DSAlbum</h2>
+<h2>Danh Sách Album</h2>
 
 <p>
-    @Html.ActionLink("Create New", "ThemAlbum")
+    @Html.ActionLink("Thêm mới Album", "ThemAlbum")
 </p>
 <table class="table">
     <tr>
+        <th style="width:150px">Mã Album</th>
         <th style="width:150px">Tên Album</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaAlbum)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenAlbum)
             </td>

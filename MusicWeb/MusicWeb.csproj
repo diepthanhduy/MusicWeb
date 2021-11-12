@@ -305,6 +305,7 @@
     <Content Include="Views\Admin\Chitiet.cshtml" />
     <Content Include="Views\Admin\XoaUser.cshtml" />
     <Content Include="Views\Admin\Sua.cshtml" />
+    <Content Include="Views\Admin\Xoa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
