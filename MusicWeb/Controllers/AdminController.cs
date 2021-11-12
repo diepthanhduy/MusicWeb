@@ -98,7 +98,7 @@ namespace MusicWeb.Controllers
 
 
         }
-        public ActionResult Nhac(int ?page)
+        public ActionResult Nhac(int? page)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 7;
@@ -157,6 +157,116 @@ namespace MusicWeb.Controllers
                 }
                 return RedirectToAction("Nhac");
             }
+        }
+        //Hien thi chi tiet bai hat
+        public ActionResult Chitiet(int id)
+        {
+            //Lay doi tuong cafe theo ma
+            Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
+            ViewBag.MaBaiNhac = nhac.MaBaiNhac;
+            if (nhac == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(nhac);
+        }
+        //Xoa bai hat
+        [HttpGet]
+        public ActionResult Xoa(int id)
+        {
+            //Lay cafe theo ma
+            Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
+            ViewBag.MaBaiNhac = nhac.MaBaiNhac;
+            if (nhac == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(nhac);
+        }
+        [HttpPost, ActionName("Xoa")]
+        public ActionResult Xacnhanxoa(int id)
+        {
+            //Lay ra doi tuong can xoa theo ma
+            Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
+            ViewBag.MaBaiNhac = nhac.MaBaiNhac;
+            if (nhac == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.Nhacs.DeleteOnSubmit(nhac);
+            db.SubmitChanges();
+            return RedirectToAction("Nhac");
+        }
+        //sửa thông tin
+        [HttpGet]
+        public ActionResult Sua(int id)
+        {
+            //Lay sản phẩm theo mã
+            Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
+            ViewBag.MaBaiNhac = nhac.MaBaiNhac;
+            if (nhac == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            ViewBag.MaNgheSi = new SelectList(db.NgheSis.ToList().OrderBy(n => n.TenNgheSi), "MaNgheSi", "TenNgheSi", nhac.MaBaiNhac);
+            ViewBag.MaLoai = new SelectList(db.TheLoais.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai", nhac.MaBaiNhac);
+            ViewBag.MaSangTac = new SelectList(db.SangTacs.ToList().OrderBy(n => n.TenNguoiST), "MaSangTac", "TenNguoiST", nhac.MaBaiNhac);
+            ViewBag.MaAlbum = new SelectList(db.Albums.ToList().OrderBy(n => n.TenAlbum), "MaAlbum", "TenAlbum", nhac.MaBaiNhac);
+            return View(nhac);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Sua(Nhac nhac, HttpPostedFileBase fileAnh, HttpPostedFileBase fileNhac)
+        {
+            //Dua du lieu vao dropdownload
+            ViewBag.MaNgheSi = new SelectList(db.NgheSis.ToList().OrderBy(n => n.TenNgheSi), "MaNgheSi", "TenNgheSi");
+            ViewBag.MaLoai = new SelectList(db.TheLoais.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            ViewBag.MaSangTac = new SelectList(db.SangTacs.ToList().OrderBy(n => n.TenNguoiST), "MaSangTac", "TenNguoiST");
+            ViewBag.MaAlbum = new SelectList(db.Albums.ToList().OrderBy(n => n.TenAlbum), "MaAlbum", "TenAlbum");
+            Nhac nhac2 = db.Nhacs.Single(n => n.MaBaiNhac == nhac.MaBaiNhac);
+            //Kiem tra duong dan file
+            if (fileAnh == null || fileNhac == null)
+            {
+                var fileNameAnh = Path.GetFileName(fileAnh.FileName);
+                var fileNameNhac = Path.GetFileName(fileNhac.FileName);
+                DateTime now = DateTime.Now;
+                string date_str = now.ToString("yyyyMMdd_HHmmss");
+                var path = Path.Combine(Server.MapPath("~/img"), fileNameAnh);
+                var path1 = Path.Combine(Server.MapPath("~/music"), fileNameNhac);
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.Thongbao = "Hình ảnh đã tồn tại";
+                }
+                else if (System.IO.File.Exists(path1))
+                {
+                    ViewBag.Thongbao1 = "File nhạc đã tồn tại";
+                }
+                else
+                {
+                    fileAnh.SaveAs(path);
+                    fileNhac.SaveAs(path1);
+                }
+                nhac.FileAnh = fileNameAnh;
+                nhac2.FileAnh = nhac.FileAnh;
+                nhac.FileNhac = fileNameNhac;
+                nhac2.FileNhac = nhac.FileNhac;
+            }
+            //Luu vao CSDL
+            nhac2.TenNhac = nhac.TenNhac;
+            if (nhac.NgayCN != null)
+            {
+                nhac2.NgayCN = nhac.NgayCN;
+            }
+            nhac2.MaLoai = nhac.MaLoai;
+            nhac2.MaNgheSi = nhac.MaNgheSi;
+            nhac2.MaSangTac = nhac.MaSangTac;
+            nhac2.MaAlbum = nhac.MaAlbum;
+            db.SubmitChanges();
+            return RedirectToAction("Nhac");
         }
         //QL thể loại nhạc
         //DS the loại nhạc
@@ -363,5 +473,40 @@ namespace MusicWeb.Controllers
             db.SubmitChanges();
             return RedirectToAction("DSAlbum");
         }
+        //QL User
+        //DS User
+        public ActionResult DSUser(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 7;
+            return View(db.Users.ToList().OrderBy(n => n.MaUser).ToPagedList(pageNumber, pageSize));
+        }
+        [HttpGet]
+        public ActionResult XoaUser(int id)
+        {
+            User user = db.Users.SingleOrDefault(n => n.MaUser == id);
+            ViewBag.MaUser = user.MaUser;
+            if (user == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(user);
+        }
+        [HttpPost, ActionName("XoaUser")]
+        public ActionResult XacNhanXoaUser(int id)
+        {
+            Album album = db.Albums.SingleOrDefault(n => n.MaAlbum == id);
+            ViewBag.MaAlbum = album.MaAlbum;
+            if (album == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            db.Albums.DeleteOnSubmit(album);
+            db.SubmitChanges();
+            return RedirectToAction("DSAlbum");
+        }
+
     }
 }
