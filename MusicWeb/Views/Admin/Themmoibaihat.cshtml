@@ -16,64 +16,80 @@
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
-            @Html.LabelFor(model => model.TenNhac, new { @class = "control-label col-md-2" })
+            <td>
+                Tên Bài Hát:
+            </td>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenNhac)
                 @Html.ValidationMessageFor(model => model.TenNhac)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.NgayCN, new { @class = "control-label col-md-2" })
+            <td>
+                Ngày Cập Nhật:
+            </td>
             <div class="col-md-10">
                 <input type="date" name="NgayCN" value="" />
                 @Html.ValidationMessageFor(model => model.NgayCN)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.MaNgheSi, new { @class = "control-label col-md-2" })
+            <td>
+                Nghệ Sĩ:
+            </td>
             <div class="col-md-10">
                 @Html.DropDownList("MaNgheSi")
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.MaLoai, new { @class = "control-label col-md-2" })
+            <td>
+                Loại Nhạc:
+            </td>
             <div class="col-md-10">
                 @Html.DropDownList("MaLoai")
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.MaSangTac, new { @class = "control-label col-md-2" })
+            <td>
+                Tác Giả:
+            </td>
             <div class="col-md-10">
                 @Html.DropDownList("MaSangTac")
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.MaAlbum, new { @class = "control-label col-md-2" })
+            <td>
+                Album:
+            </td>
             <div class="col-md-10">
                 @Html.DropDownList("MaAlbum")
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.FileNhac, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="fileNhac"  id="fileNhac"  />
-                @ViewBag.Thongbao
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileAnh, new { @class = "control-label col-md-2" })
+            <td>
+                File Ảnh:
+            </td>
             <div class="col-md-10">
                 <input type="file" name="fileAnh" id="fileAnh" />
                 @ViewBag.Thongbao
             </div>
         </div>
         <div class="form-group">
+            <td>
+                File Nhạc:
+            </td>
+            <div class="col-md-10">
+                <input type="file" name="fileNhac"  id="fileNhac"  />
+                @ViewBag.Thongbao
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <p> </p>
+                <input type="submit" value="Create" class="btn btn-danger" />
+                <a class="btn btn-info" href="@Url.Action("Nhac", "Admin")">Quay về danh sách nhạc</a>
             </div>
         </div>
     </div>
 }
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

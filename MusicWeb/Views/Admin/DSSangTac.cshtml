@@ -8,12 +8,15 @@
 <h2>Danh Sách Tác Giả</h2>
 
 <p>
-    @Html.ActionLink("Thêm mới tác giả", "ThemSangTac")
+    <a class="btn btn-info" href="@Url.Action("ThemSangTac", "Admin")">Thêm mới</a>
 </p>
 <table class="table">
     <tr>
         <th style="width:150px">Id</th>
-        <th style="width:150px">Tên Người Sáng Tác</th>
+        <th style="width:190px">Tên Người Sáng Tác</th>
+        <th style="width:150px">
+            Tương Tác
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -26,7 +29,8 @@
                 @Html.DisplayFor(modelItem => item.TenNguoiST)
             </td>
             <td>
-                @Html.ActionLink("Delete", "XoaSangTac", new { id = item.MaSangTac })
+                <a class="btn btn-info" href="@Url.Action("XoaSangTac", "Admin", new { id = item.MaSangTac })" class="lnkGetReward">Xóa</a>
+                @*@Html.ActionLink("Delete", "XoaSangTac", new { id = item.MaSangTac })*@
             </td>
         </tr>
     }

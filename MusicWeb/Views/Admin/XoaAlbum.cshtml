@@ -7,13 +7,12 @@
 
 <h2>Xác Nhận Xóa Thông Tin Album</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc muốn xóa không?</h3>
 <div>
-    <h4>Album</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TenAlbum)
+            Tên Album:
         </dt>
 
         <dd>
@@ -26,8 +25,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "DSAlbum")
+            <p></p>
+            <input type="submit" value="Xác Nhận" class="btn btn-danger" /> |
+            <a class="btn btn-info" href="@Url.Action("DSAlbum", "Admin")">Quay về</a>
         </div>
     }
 </div>

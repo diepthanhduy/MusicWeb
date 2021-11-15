@@ -10,12 +10,13 @@
 <h2>Thể Loại Nhạc</h2>
 
 <p>
-    @Html.ActionLink("Thêm mới thể loại", "ThemLoaiNhac")
+    <a class="btn btn-info" href="@Url.Action("ThemLoaiNhac", "Admin")">Thêm mới thể loại nhạc</a>
 </p>
-<table class="table">
+<table class="table" border="1">
     <tr>
         <th style="width:150px">Mã Loại</th>
         <th style="width:150px">Tên Thể Loại</th>
+        <th style="width: 150px"></th>
     </tr>
 
     @foreach (var item in Model)
@@ -28,7 +29,7 @@
                 @Html.DisplayFor(modelItem => item.TenLoai)
             </td>
             <td>
-                @Html.ActionLink("Xóa", "XoaTheLoaiNhac", new { id = item.MaLoai })
+                <a class="btn btn-info" href="@Url.Action("XoaTheLoaiNhac", "Admin", new { id = item.MaLoai })" class="lnkGetReward">Xóa</a>
             </td>
         </tr>
     }

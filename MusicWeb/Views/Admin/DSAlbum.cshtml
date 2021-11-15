@@ -8,12 +8,13 @@
 <h2>Danh Sách Album</h2>
 
 <p>
-    @Html.ActionLink("Thêm mới Album", "ThemAlbum")
+    <a class="btn btn-info" href="@Url.Action("ThemAlbum", "Admin")">Thêm mới Album</a>
 </p>
 <table class="table">
     <tr>
         <th style="width:150px">Mã Album</th>
         <th style="width:150px">Tên Album</th>
+        <th style="width: 150px">Tương Tác</th>
     </tr>
 
     @foreach (var item in Model)
@@ -26,7 +27,7 @@
                 @Html.DisplayFor(modelItem => item.TenAlbum)
             </td>
             <td>
-                @Html.ActionLink("Delete", "XoaAlbum", new { id = item.MaAlbum })
+                <a class="btn btn-info" href="@Url.Action("XoaAlbum", "Admin", new { id = item.MaAlbum })" class="lnkGetReward">Xóa</a>
             </td>
         </tr>
     }

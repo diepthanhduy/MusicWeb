@@ -7,7 +7,7 @@
 
 <h2>XÁC NHẬN XÓA DANH SÁCH USER</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc muốn xóa không?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -48,8 +48,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xác Nhận" class="btn btn-default" /> |
-            @Html.ActionLink("Quay Lại", "DSUser")
+            <p></p>
+            <input type="submit" value="Xác Nhận" class="btn btn-danger" /> |
+            <a class="btn btn-info" href="@Url.Action("DSUser", "Admin")">Quay về</a>
         </div>
     }
 </div>

@@ -59,16 +59,6 @@
         </dd>
 
         <dt>
-            Nhạc:
-        </dt>
-
-        <dd>
-            <audio style="width:100%" controls>
-                <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4">
-            </audio>
-        </dd>
-
-        <dt>
             Ảnh:
         </dt>
 
@@ -76,9 +66,18 @@
             <img src="@Url.Content("~/img/"+ Model.FileAnh)" width="120px" />
         </dd>
 
+        <dt>
+            Nhạc:
+        </dt>
+
+        <dd>
+            <audio style="width:50%" controls>
+                <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4">
+            </audio>
+        </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Admin", new { id = Model.MaBaiNhac }) |
-    @Html.ActionLink("Quay Lại", "Nhac")
-</p>
+<div>
+    <a class="btn btn-info" href="@Url.Action("Sua", "Admin", new { id = Model.MaBaiNhac })" class="lnkGetReward">Sửa</a> |
+    <a class="btn btn-info" href="@Url.Action("Nhac", "Admin")">Quay về danh sách nhạc</a>
+</div>

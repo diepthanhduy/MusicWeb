@@ -59,21 +59,21 @@
         </dd>
 
         <dt>
-            Nhạc:
-        </dt>
-
-        <dd>
-            <audio style="width:100%" controls>
-                <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4">
-            </audio>
-        </dd>
-
-        <dt>
             Ảnh:
         </dt>
 
         <dd>
             <img src="@Url.Content("~/img/"+ Model.FileAnh)" width="120px" />
+        </dd>
+
+        <dt>
+            Nhạc:
+        </dt>
+
+        <dd>
+            <audio style="width:50%" controls>
+                <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4">
+            </audio>
         </dd>
 
     </dl>
@@ -83,8 +83,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xác Nhận" class="btn btn-default" /> |
-            @Html.ActionLink("Quay Lại", "Nhac")
+            <p></p>
+            <input type="submit" value="Xác Nhận" class="btn btn-danger" /> |
+            <a class="btn btn-info" href="@Url.Action("Nhac", "Admin")">Quay về</a>
         </div>
     }
 </div>

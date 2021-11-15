@@ -161,7 +161,7 @@ namespace MusicWeb.Controllers
         //Hien thi chi tiet bai hat
         public ActionResult Chitiet(int id)
         {
-            //Lay doi tuong cafe theo ma
+            //Lay doi tuong bai hat theo ma
             Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
             ViewBag.MaBaiNhac = nhac.MaBaiNhac;
             if (nhac == null)
@@ -175,7 +175,7 @@ namespace MusicWeb.Controllers
         [HttpGet]
         public ActionResult Xoa(int id)
         {
-            //Lay cafe theo ma
+            //Lay bai hat theo ma
             Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
             ViewBag.MaBaiNhac = nhac.MaBaiNhac;
             if (nhac == null)

@@ -39,7 +39,8 @@
             @Html.DisplayFor(modelItem => item.MatKhau)
         </td>
         <td>
-            @Html.ActionLink("Delete", "XoaUser", new { id=item.MaUser })
+            <a class="btn btn-info" href="@Url.Action("XoaUser", "Admin", new { id = item.MaUser })" class="lnkGetReward">Xóa</a>
+            @*@Html.ActionLink("Delete", "XoaUser", new { id = item.MaUser })*@
         </td>
     </tr>
 }

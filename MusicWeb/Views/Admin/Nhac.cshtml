@@ -10,14 +10,14 @@
 <h2>QUẢN LÝ DANH SÁCH BÀI HÁT</h2>
 
 <p>
-    @Html.ActionLink("Thêm Mới", "Themmoibaihat")
+    <a class="btn btn-info" href="@Url.Action("Themmoibaihat", "Admin")">Thêm mới</a>
 </p>
 <table class="table" border="1">
     <tr>
         <th style="width: 150px">
             Tên Nhạc
         </th>
-        <th style="width: 140px">
+        <th style="width: 120px">
             Ngày Cập Nhật
         </th>
         <th style="width: 100px">
@@ -32,49 +32,52 @@
         <th style="width: 100px">
             Album
         </th>
-        <th style="width: 120px">
+        <th style="width: 150px">
             Ảnh
         </th>
-        <th style="width: 200px">
+        <th style="width: 150px">
             File Nhạc
+        </th>
+        <th style="width: 190px">
+            Tương tác
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.TenNhac)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NgayCN)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NgheSi.TenNgheSi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SangTac.TenNguoiST)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Album.TenAlbum)
-    </td>
-    <td>
-        <img style="width:120px; height:100px" src="@Url.Content("~/img/"+ item.FileAnh)" />
-    </td>
-    <td>
-        <audio style="width:100%" controls>
-            <source src="@Url.Content("~/music/"+ item.FileNhac)" type="audio/mp4">
-        </audio>
-    </td>
-    <td style="width:190px">
-        @Html.ActionLink("Sửa", "Sua", new { id = item.MaBaiNhac }) |
-        @Html.ActionLink("Chi tiết", "Chitiet", new { id = item.MaBaiNhac }) |
-        @Html.ActionLink("Xóa", "Xoa", new { id = item.MaBaiNhac })
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNhac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayCN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgheSi.TenNgheSi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SangTac.TenNguoiST)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Album.TenAlbum)
+        </td>
+        <td>
+            <img style="width:120px; height:100px" src="@Url.Content("~/img/"+ item.FileAnh)" />
+        </td>
+        <td>
+            <audio style="width:100%" controls>
+                <source src="@Url.Content("~/music/"+ item.FileNhac)" type="audio/mp4">
+            </audio>
+        </td>
+        <td style="width:190px">
+            <a class="btn btn-info" href="@Url.Action("Sua", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Sửa</a>
+            <a class="btn btn-info" href="@Url.Action("Chitiet", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Chi tiết</a>
+            <a class="btn btn-info" href="@Url.Action("Xoa", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Xóa</a>
+        </td>
+    </tr>
     }
 </table>
 @*Tao lien ket cac trang*@

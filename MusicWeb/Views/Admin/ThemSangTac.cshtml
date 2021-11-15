@@ -5,18 +5,19 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Thêm Nghệ Sĩ Sáng Tác</h2>
+<h2>Thêm Tác Giả</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Nghệ Sĩ Sáng Tác</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TenNguoiST, htmlAttributes: new { @class = "control-label col-md-2" })
+            <td>
+                Tên Tác Giả:
+            </td>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenNguoiST, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenNguoiST, "", new { @class = "text-danger" })
@@ -25,12 +26,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <p> </p>
+                <input type="submit" value="Create" class="btn btn-danger" />
+                <a class="btn btn-info" href="@Url.Action("DSSangTac", "Admin")">Quay về danh sách tác giả</a>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "DSSangTac")
-</div>
