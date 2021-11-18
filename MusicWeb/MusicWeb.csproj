@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apiController\LoginController.cs" />
     <Compile Include="apiController\RandSongController.cs" />
     <Compile Include="apiController\SongController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -160,6 +161,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBMusic.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

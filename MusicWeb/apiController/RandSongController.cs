@@ -11,7 +11,7 @@ namespace MusicWeb.apiController
     public class RandSongController : ApiController
     {
         DBMusicDataContext db = new DBMusicDataContext();
-        // GET: api/RandSong
+        // GET: api/RandSong (random 1 song in db)
         public IEnumerable<Song> Get()
         {
             var qry = from row in db.Nhacs

@@ -13,7 +13,7 @@ namespace MusicWeb.apiController
     {
         DBMusicDataContext db = new DBMusicDataContext();
 
-        // GET: api/Song
+        // GET: api/Song (get all song)
         public IEnumerable<Song> Get()
         {
             List<Song> listSong = new List<Song>();
@@ -25,7 +25,7 @@ namespace MusicWeb.apiController
             return listSong;
         }
 
-        // GET: api/Song/5
+        // GET: api/Song/5 (get by id)
         public IEnumerable<Song> Get(int id)
         {
             var nhac = db.Nhacs.SingleOrDefault(x => x.MaBaiNhac == id);
