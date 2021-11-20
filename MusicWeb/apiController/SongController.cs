@@ -9,6 +9,7 @@ using MusicWeb.Models;
 
 namespace MusicWeb.apiController
 {
+    [RoutePrefix("api/Song")]
     public class SongController : ApiController
     {
         DBMusicDataContext db = new DBMusicDataContext();

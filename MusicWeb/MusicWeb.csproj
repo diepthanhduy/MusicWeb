@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="apiController\LoginController.cs" />
     <Compile Include="apiController\RandSongController.cs" />
+    <Compile Include="apiController\RegisterController.cs" />
     <Compile Include="apiController\SongController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -203,7 +204,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="img\hylt.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -312,6 +312,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\" />
     <Folder Include="music\" />
   </ItemGroup>
   <ItemGroup>

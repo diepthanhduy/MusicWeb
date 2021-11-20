@@ -25,26 +25,29 @@ namespace MusicWeb.apiController
         }
 
         // POST: api/Login
-        public IHttpActionResult Post([FromBody]LoginModel login)
+        public IHttpActionResult Post(LoginModel login)
         {
-            if (login.TaiKhoan.Length == 0)
-            {
-                return Ok(0);
-            }
             try
             {
+                if (login.Equals(null)){
+                    return Ok(login);
+                }
+
                 var check = db.Users.Where(c => c.TaiKhoan == login.TaiKhoan && c.MatKhau == login.MatKhau).Single();
-                List<LoginModel> user = new List<LoginModel>();
-                user.Add(new LoginModel()
-                {
-                    TaiKhoan = check.TaiKhoan,
-                    TenUser = check.TenUser,
-                });
+                //List<LoginModel> user = new List<LoginModel>();
+                LoginModel user = new LoginModel();
+                user.TenUser = check.TenUser;
+                user.TaiKhoan = check.TaiKhoan;
+                //user.(new LoginModel()
+                //{
+                //    TaiKhoan = check.TaiKhoan,
+                //    TenUser = check.TenUser,
+                //});
                 if (check.TaiKhoan.Length > 0)
                 {
                     return Ok(user);
                 }
-                return Ok(0);
+                return Ok(user);
             }
             catch (Exception e) {
                 return Ok(e);
