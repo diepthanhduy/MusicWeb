@@ -12,7 +12,7 @@ namespace MusicWeb.apiController
     {
         DBMusicDataContext db = new DBMusicDataContext();
         //GET: api/RandSong(random 1 song in db)
-        public IEnumerable<Song> Get()
+        public Song Get()
         {
             var qry = from row in db.Nhacs
                       select row;
@@ -21,17 +21,13 @@ namespace MusicWeb.apiController
             int index = new Random().Next(count);
 
             var nhac = qry.Skip(index).FirstOrDefault();
-            List<Song> song = new List<Song>();
-            song.Add(new Song()
-            {
-                IDBaiHat = nhac.MaBaiNhac,
-                TenBaiHat = nhac.TenNhac
-            ,
-                FileAnh = nhac.FileAnh,
-                FileNhac = nhac.FileNhac,
-                TenNgheSi = nhac.NgheSi.TenNgheSi
-            });
-            return (IEnumerable<Song>)song;
+            Song song = new Song();
+            song.IDBaiHat = nhac.MaBaiNhac;
+            song.TenBaiHat = nhac.TenNhac;
+            song.FileAnh = nhac.FileAnh;
+            song.FileNhac = nhac.FileNhac;
+            song.TenNgheSi = nhac.NgheSi.TenNgheSi;
+            return song;
         }
 
         // GET: api/RandSong/5
