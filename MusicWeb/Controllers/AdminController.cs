@@ -207,6 +207,7 @@ namespace MusicWeb.Controllers
             //Lay sản phẩm theo mã
             Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
             ViewBag.MaBaiNhac = nhac.MaBaiNhac;
+            ViewBag.TenBaiHat = nhac.TenNhac;
             if (nhac == null)
             {
                 Response.StatusCode = 404;
@@ -229,7 +230,7 @@ namespace MusicWeb.Controllers
             ViewBag.MaAlbum = new SelectList(db.Albums.ToList().OrderBy(n => n.TenAlbum), "MaAlbum", "TenAlbum");
             Nhac nhac2 = db.Nhacs.Single(n => n.MaBaiNhac == nhac.MaBaiNhac);
             //Kiem tra duong dan file
-            if (fileAnh == null || fileNhac == null)
+            if (fileAnh == null && fileNhac == null)
             {
                 var fileNameAnh = Path.GetFileName(fileAnh.FileName);
                 var fileNameNhac = Path.GetFileName(fileNhac.FileName);
@@ -237,13 +238,9 @@ namespace MusicWeb.Controllers
                 string date_str = now.ToString("yyyyMMdd_HHmmss");
                 var path = Path.Combine(Server.MapPath("~/img"), fileNameAnh);
                 var path1 = Path.Combine(Server.MapPath("~/music"), fileNameNhac);
-                if (System.IO.File.Exists(path))
+                if (System.IO.File.Exists(path) && System.IO.File.Exists(path1))
                 {
-                    ViewBag.Thongbao = "Hình ảnh đã tồn tại";
-                }
-                else if (System.IO.File.Exists(path1))
-                {
-                    ViewBag.Thongbao1 = "File nhạc đã tồn tại";
+                    ViewBag.Thongbao = "File đã tồn tại";
                 }
                 else
                 {

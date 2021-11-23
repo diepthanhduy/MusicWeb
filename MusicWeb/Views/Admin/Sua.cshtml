@@ -14,7 +14,7 @@
 
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.MaBaiNhac)
 
         <div class="form-group">
@@ -25,7 +25,15 @@
                 <div style="font:18px; padding: 5px 0 0 5px"> @ViewBag.MaBaiNhac </div>
             </div>
         </div>
-
+        <div class="form-group">
+            <td>
+                Tên Bài Hát:
+            </td>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenNhac)
+                @Html.ValidationMessageFor(model => model.TenNhac)
+            </div>
+        </div>
         <div class="form-group">
             <td>
                 Ngày Cập Nhật:
@@ -78,6 +86,7 @@
             <div class="col-md-10">
                 Chọn file ảnh mới<br />
                 <input type="file" name="fileAnh" />
+                <p></p>
                 <img src="@Url.Content("~/img/"+ Model.FileAnh)" width="70px" /> (Ảnh hiện tại)
                 @*Thong bao trùng*@
                 @ViewBag.Thongbao
@@ -90,22 +99,27 @@
             <div class="col-md-10">
                 Chọn file nhạc mới<br />
                 <input type="file" name="fileNhac" />
-                <img src="@Url.Content("~/music/"+ Model.FileNhac)" width="70px" /> (File hiện tại)
+                <p> </p>
+                <audio style="width:50%" controls>
+                    <source src="@Url.Content("~/music/"+ Model.FileNhac)" type="audio/mp4"> (File nhạc hiện tại)
+                </audio>
                 @*Thong bao trùng*@
-                @ViewBag.Thongbao1
+                @ViewBag.Thongbao
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <p> </p>
+                <input type="submit" value="Lưu" class="btn btn-danger" />
+                <a class="btn btn-info" href="@Url.Action("Nhac", "Admin")">Quay về danh sách nhạc</a>
             </div>
         </div>
     </div>
 }
 
-<div>
+@*<div>
     <input type="submit" value="Lưu" class="btn btn-danger" />
     <a class="btn btn-info" href="@Url.Action("Nhac", "Admin")">Quay về danh sách nhạc</a>
-</div>
+</div>*@
 

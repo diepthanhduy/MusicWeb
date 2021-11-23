@@ -35,9 +35,6 @@
         <th style="width: 150px">
             Ảnh
         </th>
-        <th style="width: 150px">
-            File Nhạc
-        </th>
         <th style="width: 190px">
             Tương tác
         </th>
@@ -45,48 +42,43 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenNhac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayCN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgheSi.TenNgheSi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SangTac.TenNguoiST)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Album.TenAlbum)
-        </td>
-        <td>
-            <img style="width:120px; height:100px" src="@Url.Content("~/img/"+ item.FileAnh)" />
-        </td>
-        <td>
-            <audio style="width:100%" controls>
-                <source src="@Url.Content("~/music/"+ item.FileNhac)" type="audio/mp4">
-            </audio>
-        </td>
-        <td style="width:190px">
-            <a class="btn btn-info" href="@Url.Action("Sua", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Sửa</a>
-            <a class="btn btn-info" href="@Url.Action("Chitiet", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Chi tiết</a>
-            <a class="btn btn-info" href="@Url.Action("Xoa", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Xóa</a>
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNhac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgheSi.TenNgheSi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai.TenLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SangTac.TenNguoiST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Album.TenAlbum)
+            </td>
+            <td>
+                <img style="width:120px; height:100px" src="@Url.Content("~/img/"+ item.FileAnh)" />
+            </td>
+            <td style="width:190px">
+                <a class="btn btn-info" href="@Url.Action("Sua", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Sửa</a>
+                <a class="btn btn-info" href="@Url.Action("Chitiet", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Chi tiết</a>
+                <a class="btn btn-info" href="@Url.Action("Xoa", "Admin", new { id = item.MaBaiNhac })" class="lnkGetReward">Xóa</a>
+            </td>
+        </tr>
     }
 </table>
 @*Tao lien ket cac trang*@
 Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
 <div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page}))
+    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page }))
 </div>
 <style>
-    .MenuTrang li{
+    .MenuTrang li {
         display: inline;
     }
 </style>
