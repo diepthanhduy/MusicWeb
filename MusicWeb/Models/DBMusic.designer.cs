@@ -60,7 +60,7 @@ namespace MusicWeb.Models
     #endregion
 		
 		public DBMusicDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["AppNgheNhacConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["AppNgheNhacConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1078,7 +1078,7 @@ namespace MusicWeb.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileNhac", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileNhac", DbType="Char(50)")]
 		public string FileNhac
 		{
 			get
@@ -1098,7 +1098,7 @@ namespace MusicWeb.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileAnh", DbType="VarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileAnh", DbType="Char(50)")]
 		public string FileAnh
 		{
 			get

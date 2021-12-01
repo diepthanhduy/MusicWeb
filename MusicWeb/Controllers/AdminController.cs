@@ -158,19 +158,6 @@ namespace MusicWeb.Controllers
                 return RedirectToAction("Nhac");
             }
         }
-        //Hien thi chi tiet bai hat
-        public ActionResult Chitiet(int id)
-        {
-            //Lay doi tuong bai hat theo ma
-            Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
-            ViewBag.MaBaiNhac = nhac.MaBaiNhac;
-            if (nhac == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-            return View(nhac);
-        }
         //Xoa bai hat
         [HttpGet]
         public ActionResult Xoa(int id)
