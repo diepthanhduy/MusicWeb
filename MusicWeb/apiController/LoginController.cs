@@ -27,6 +27,7 @@ namespace MusicWeb.apiController
         // POST: api/Login
         public IHttpActionResult Post(LoginModel login)
         {
+
             try
             {
                 if (login.Equals(null)){
@@ -38,11 +39,7 @@ namespace MusicWeb.apiController
                 LoginModel user = new LoginModel();
                 user.TenUser = check.TenUser;
                 user.TaiKhoan = check.TaiKhoan;
-                //user.(new LoginModel()
-                //{
-                //    TaiKhoan = check.TaiKhoan,
-                //    TenUser = check.TenUser,
-                //});
+                user.MaUser = check.MaUser;
                 if (check.TaiKhoan.Length > 0)
                 {
                     return Ok(user);

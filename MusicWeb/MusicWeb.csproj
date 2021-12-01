@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="apiController\LoginController.cs" />
+    <Compile Include="apiController\PlayListController.cs" />
     <Compile Include="apiController\RandSongController.cs" />
     <Compile Include="apiController\RegisterController.cs" />
     <Compile Include="apiController\SongController.cs" />
@@ -163,6 +164,7 @@
       <DependentUpon>DBMusic.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
