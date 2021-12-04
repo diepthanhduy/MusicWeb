@@ -14,6 +14,7 @@ namespace MusicWeb.apiController
         //GET: api/RandSong(random 1 song in db)
         public Song Get()
         {
+            //Truy vấn và chọn một bài nhạc bất kỳ trong csdl
             var qry = from row in db.Nhacs
                       select row;
 

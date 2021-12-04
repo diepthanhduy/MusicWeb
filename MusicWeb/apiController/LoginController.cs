@@ -35,7 +35,6 @@ namespace MusicWeb.apiController
                 }
 
                 var check = db.Users.Where(c => c.TaiKhoan == login.TaiKhoan && c.MatKhau == login.MatKhau).Single();
-                //List<LoginModel> user = new List<LoginModel>();
                 LoginModel user = new LoginModel();
                 user.TenUser = check.TenUser;
                 user.TaiKhoan = check.TaiKhoan;

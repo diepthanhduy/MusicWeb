@@ -216,34 +216,47 @@ namespace MusicWeb.Controllers
             ViewBag.MaSangTac = new SelectList(db.SangTacs.ToList().OrderBy(n => n.TenNguoiST), "MaSangTac", "TenNguoiST");
             ViewBag.MaAlbum = new SelectList(db.Albums.ToList().OrderBy(n => n.TenAlbum), "MaAlbum", "TenAlbum");
             Nhac nhac2 = db.Nhacs.Single(n => n.MaBaiNhac == nhac.MaBaiNhac);
+
             //Kiem tra duong dan file
-            if (fileAnh == null && fileNhac == null)
+            if (fileAnh != null)
             {
                 var fileNameAnh = Path.GetFileName(fileAnh.FileName);
-                var fileNameNhac = Path.GetFileName(fileNhac.FileName);
-                DateTime now = DateTime.Now;
-                string date_str = now.ToString("yyyyMMdd_HHmmss");
                 var path = Path.Combine(Server.MapPath("~/img"), fileNameAnh);
-                var path1 = Path.Combine(Server.MapPath("~/music"), fileNameNhac);
-                if (System.IO.File.Exists(path) && System.IO.File.Exists(path1))
+                if (System.IO.File.Exists(path))
                 {
                     ViewBag.Thongbao = "File đã tồn tại";
                 }
                 else
                 {
                     fileAnh.SaveAs(path);
-                    fileNhac.SaveAs(path1);
                 }
                 nhac.FileAnh = fileNameAnh;
                 nhac2.FileAnh = nhac.FileAnh;
+            }
+            if (fileNhac != null)
+            {
+                var fileNameNhac = Path.GetFileName(fileNhac.FileName);
+                var path1 = Path.Combine(Server.MapPath("~/music"), fileNameNhac);
+                if (System.IO.File.Exists(path1))
+                {
+                    ViewBag.Thongbao = "File đã tồn tại";
+                }
+                else
+                {
+                    fileNhac.SaveAs(path1);
+                }
+
                 nhac.FileNhac = fileNameNhac;
                 nhac2.FileNhac = nhac.FileNhac;
             }
-            //Luu vao CSDL
             nhac2.TenNhac = nhac.TenNhac;
             if (nhac.NgayCN != null)
             {
                 nhac2.NgayCN = nhac.NgayCN;
+            }
+            else
+            {
+                nhac2.NgayCN = DateTime.Now;
             }
             nhac2.MaLoai = nhac.MaLoai;
             nhac2.MaNgheSi = nhac.MaNgheSi;
