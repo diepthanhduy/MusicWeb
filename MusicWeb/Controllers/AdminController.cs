@@ -191,7 +191,7 @@ namespace MusicWeb.Controllers
         [HttpGet]
         public ActionResult Sua(int id)
         {
-            //Lay sản phẩm theo mã
+            //Lay bài hát theo mã
             Nhac nhac = db.Nhacs.SingleOrDefault(n => n.MaBaiNhac == id);
             ViewBag.MaBaiNhac = nhac.MaBaiNhac;
             ViewBag.TenBaiHat = nhac.TenNhac;
