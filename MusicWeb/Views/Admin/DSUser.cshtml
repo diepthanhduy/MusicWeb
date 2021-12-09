@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MusicWeb.Models.User>
+﻿@using MusicWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MusicWeb.Models.User>
 
 @{
     ViewBag.Title = "DSUser";
@@ -24,25 +26,35 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaUser)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenUser)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaiKhoan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MatKhau)
-        </td>
-        <td>
-            <a class="btn btn-info" href="@Url.Action("XoaUser", "Admin", new { id = item.MaUser })" class="lnkGetReward">Xóa</a>
-            @*@Html.ActionLink("Delete", "XoaUser", new { id = item.MaUser })*@
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaiKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
+            <td>
+                <a class="btn btn-info" href="@Url.Action("XoaUser", "Admin", new { id = item.MaUser })" class="lnkGetReward">Xóa</a>
+                @*@Html.ActionLink("Delete", "XoaUser", new { id = item.MaUser })*@
+            </td>
+        </tr>
+    }
 
 </table>
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>

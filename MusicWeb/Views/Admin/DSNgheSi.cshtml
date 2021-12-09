@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MusicWeb.Models.NgheSi>
+﻿@using MusicWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MusicWeb.Models.NgheSi>
 
 @{
     ViewBag.Title = "DSNgheSi";
@@ -18,18 +20,28 @@
         <th style="width: 150px">Tương Tác</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaNgheSi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenNgheSi)
-        </td>
-        <td>
-            <a class="btn btn-info" href="@Url.Action("XoaNgheSi", "Admin", new { id = item.MaNgheSi })" class="lnkGetReward">Xóa</a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaNgheSi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNgheSi)
+            </td>
+            <td>
+                <a class="btn btn-info" href="@Url.Action("XoaNgheSi", "Admin", new { id = item.MaNgheSi })" class="lnkGetReward">Xóa</a>
+            </td>
+        </tr>
+    }
 
 </table>
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>

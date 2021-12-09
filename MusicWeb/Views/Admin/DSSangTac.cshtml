@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MusicWeb.Models.SangTac>
+﻿@using MusicWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MusicWeb.Models.SangTac>
 
 @{
     ViewBag.Title = "DSSangTac";
@@ -36,3 +38,12 @@
     }
 
 </table>
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Nhac", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
